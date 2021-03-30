@@ -24,6 +24,7 @@ app.get('/', (request, response) => {
 })
 
 require("./app/routes/users.routes")(app);
+require("./app/routes/products.routes")(app);
 
 
 
