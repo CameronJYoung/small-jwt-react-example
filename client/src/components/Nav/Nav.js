@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 
 import './Nav.css';
 
@@ -7,14 +7,14 @@ function Nav() {
 		<nav>
             <ul>
                 <li>
-                    <Link to="/">
+                    <NavLink to="/">
                         Home
-                    </Link>
+                    </NavLink>
                 </li>
 				<li>
-                    <Link to="/products">
+                    <NavLink to="/products">
                         products
-                    </Link>
+                    </NavLink>
                 </li>
             </ul>
 		</nav>

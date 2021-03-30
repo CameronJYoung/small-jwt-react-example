@@ -3,8 +3,7 @@ import './Products.css';
 function Products() {
 	return (
 		<>
-        
-        asdfsd
+        	<h1>Products</h1>
         </>
 	);
 }
