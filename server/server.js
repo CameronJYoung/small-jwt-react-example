@@ -1,7 +1,11 @@
 require('dotenv').config()
 const express = require('express');
+const jwt = require('express-jwt');
+const cors = require('cors');
+const jsonwebtoken = require('jsonwebtoken');
 
 const port = process.env.API_PORT;
+const jwtSecret = 'secret123'
 
 // Initialize app
 
@@ -10,6 +14,7 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
+app.use(cors());
 
 // Initialize database
 
@@ -22,6 +27,15 @@ db.sequelize.sync();
 app.get('/', (request, response) => {
     response.send({ info: 'Node.js, Express, and Postgres API' })
 })
+
+app.get('/jwt', (request, response) => {
+    response.json({
+        token: jsonwebtoken.sign({user: 'johndoe'}, jwtSecret)
+    })
+})
+
+app.use(jwt({ secret: jwtSecret, algorithms: ['HS256'] }));
+
 
 require("./app/routes/users.routes")(app);
 require("./app/routes/products.routes")(app);
