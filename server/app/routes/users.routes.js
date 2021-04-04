@@ -1,14 +1,12 @@
-module.exports = app => {
-	const users = require("../controllers/users.controller.js");
+const router = require('express').Router();
+const users = require('../controllers/users.controller.js');
 
-	var router = require("express").Router();
+module.exports = (app) => {
+	router.post('/', users.create);
+	router.get('/', users.getAll);
+	router.delete('/:id', users.delete);
+	router.get('/:id', users.getById);
+	router.put('/:id', users.update);
 
-	// Create a new Tutorial
-	router.post("/", users.create);
-	router.get("/", users.getAll);
-	router.delete("/:id", users.delete);
-	router.get("/:id", users.getById);
-	router.put("/:id", users.update);
-
-	app.use("/users", router);
+	app.use('/users', router);
 };
