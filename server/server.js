@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const jsonwebtoken = require('jsonwebtoken');
+
 const port = process.env.API_PORT;
 
 // Initialize app
