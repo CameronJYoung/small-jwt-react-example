@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const cookie = require('cookie-parser');
 
 const db = require('../models');
 
@@ -31,12 +32,10 @@ exports.logIn = (req, res) => {
 		const token = jwt.sign({ id: users.id }, jwtSecret, {
 			expiresIn: 86400,
 		});
-		return res.status(200).send({
-			id: users.id,
-			usersname: users.name,
-			email: users.email,
-			accessToken: token,
-		});
+		return () => {
+			res.cookie('token', token, { httpOnly: true });
+			res.json({ token });
+		};
 	}).catch((err) => {
 		res.status(500).send({ message: err.message });
 	});
