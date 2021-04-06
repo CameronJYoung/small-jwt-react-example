@@ -43,5 +43,26 @@ exports.logIn = (req, res) => {
 };
 
 exports.signUp = (req, res) => {
-	
+	if (!req.body.name && !req.body.email && !req.body.password) {
+		res.status(400).send({
+			message: 'Content cannot be empty!',
+		});
+		return;
+	}
+
+	const user = {
+		name: req.body.name,
+		email: req.body.email,
+		password: bcrypt.hashSync(req.body.password, 8),
+	};
+
+	User.create(user)
+		.then(() => {
+			res.send('User Registered!');
+		})
+		.catch((err) => {
+			res.status(500).send({
+				message: err.message || 'Error occured while creating user!',
+			});
+		});
 };
