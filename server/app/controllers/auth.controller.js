@@ -1,4 +1,4 @@
-const jwt = require('express-jwt');
+const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 const db = require('../models');
@@ -39,7 +39,7 @@ exports.logIn = (req, res) => {
 		});
 	}).catch((err) => {
 		res.status(500).send({ message: err.message });
-	})
+	});
 };
 
 exports.signUp = (req, res) => {
